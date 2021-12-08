@@ -31,11 +31,12 @@
 # Goals
 
 To create a performant method of serializing data to a minimum,
-binary format with the flexibility of a member-name based serializer,
+binary format with data-mutation tolerance,
 but the speed of traditional run-time binary formatting.
 
 To accomplish this goal, this approach uses a separated member-map
 to define the serialized data's shape without encoding it into the binary
 format itself. Readers and writers are pre-compiled run-time based on
-a map/type combination. These can then be cached in an application for
-performant, light-weight communications.
+a map/type combination and aren't required to be matching type versions. 
+These can then be cached in an application for performant, tollerant, 
+light-weight communications.
