@@ -35,11 +35,11 @@ binary format, with data-version tolerance,
 and the speed of traditional run-time binary formatting.
 
 To accomplish this goal, this approach uses a separated member-map
-to define the serialized data's shape without being encoding into the binary
+to define the serialized data's shape without being encoded into the binary
 data itself. Readers and writers are pre-compiled runtime based on
 map/type combinations and aren't required to match type versions. 
-These can then be cached in an application for performant, tollerant, 
-light-weight communications.
+The compiled instances can then be cached in an application for performant, 
+tollerant, light-weight communications.
 
 # Notes
 
