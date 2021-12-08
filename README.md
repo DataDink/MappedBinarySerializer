@@ -5,14 +5,14 @@
 
  **Generate a map**
 
- A map defines how a type is serialized or deserialized based on member names and an optional collection of ISerializationStrategy
+ A map defines how data is serialized or deserialized based on member names and an optional collection of ISerializationStrategy
  ```C#
  var map = MappedBinarySerializer.Map.Format(typeof(YourDataModel));
  ```
 
  **Compile a serializer**
 
- Serialization is compiled based on a map/type combination. These should be cached for performance.
+ Serializers are pre-compiled at runtime based on a map/type combination. These should be cached for performance.
  ```C#
  var reader = MappedBinarySerializer.Reader.Compile(map, typeof(YourDataModel));
  var writer = MappedBinarySerializer.Writer.Compile(map, typeof(YourDataModel));
@@ -20,10 +20,11 @@
 
  **Reading and writing to a stream**
 
- Use pre-compiled writers/readers to convert data to/from binary
+ Use pre-compiled serializers to convert data to/from binary
  ```C#
  using (var stream = new MemoryStream()) {
    writer.Write(data, stream);
+   stream.Position = 0;
    var newData = reader.Read(stream);
  }
  ```
