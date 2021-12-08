@@ -30,8 +30,8 @@
 
 # Goals
 
-To create a performant method of serializing data to a minimum,
-binary format with data-version tolerance,
+To create a performant method of serializing data to a minimal
+binary format, with data-version tolerance,
 and the speed of traditional run-time binary formatting.
 
 To accomplish this goal, this approach uses a separated member-map
