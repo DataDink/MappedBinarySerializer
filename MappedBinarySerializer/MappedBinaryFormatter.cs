@@ -23,7 +23,7 @@ namespace Serialization {
             /// <summary>
             /// The type this strategy can read and write
             /// </summary>
-            Type Type { get; }
+            Type Type { get; } // TODO: Convert to "CanSerialize(Type)" and add a "Name" field
             /// <summary>
             /// Writes a value
             /// </summary>
