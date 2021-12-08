@@ -1,5 +1,5 @@
 # MappedBinarySerializer
- A thought on flexible, mapped binary serialization, customizable, balanced to performance
+ A thought on tollerant, mapped binary serialization, customizable, balanced to performance
 
  # How To
 
