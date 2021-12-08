@@ -11,7 +11,7 @@ namespace Serialization
     public static partial class MappedBinarySerializer
     {
         /// <summary>
-        /// Represents a node in a map
+        /// Defines a layout for writing/reading binary formatting
         /// </summary>
         public static class Map {
 
@@ -69,6 +69,9 @@ namespace Serialization
                 return new Model(members);
             }
 
+            /// <summary>
+            /// Formats a map based on a type and optional ISerializationStrategies
+            /// </summary>
             public static string Format(Type type, IEnumerable<ISerializationStrategy> strategies = null) 
                 => Format(type, CreateStrategyDictionary(strategies));
 
@@ -99,11 +102,11 @@ namespace Serialization
             /// </summary>
             public abstract class Node {}
             /// <summary>
-            /// Represents a piece of data
+            /// Represents a serializable value
             /// </summary>
             public class Content : Node {
                 /// <summary>
-                /// The node value
+                /// The serialization strategy name
                 /// </summary>
                 public readonly string Value;
                 /// <inheritdoc />
@@ -114,7 +117,7 @@ namespace Serialization
             /// </summary>
             public class Collection : Node {
                 /// <summary>
-                /// The Array contents
+                /// The Array element definition
                 /// </summary>
                 public readonly Node Contents;
                 /// <inheritdoc />
