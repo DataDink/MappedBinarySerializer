@@ -32,7 +32,7 @@
 
 To create a performant method of serializing data to a minimum,
 binary format with data-version tolerance,
-but the speed of traditional run-time binary formatting.
+and the speed of traditional run-time binary formatting.
 
 To accomplish this goal, this approach uses a separated member-map
 to define the serialized data's shape without encoding it into the binary
