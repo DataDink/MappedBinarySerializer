@@ -34,7 +34,7 @@ To create a performant method of serializing data to a minimal
 binary format, with data-version tolerance,
 and the speed of traditional run-time binary formatting.
 
-To accomplish this goal, this approach uses a separated member-map
+This approach uses a separated member-map
 to define the serialized data's shape without being encoded into the binary
 data itself. Readers and writers are pre-compiled runtime based on
 map/type combinations and aren't required to match type versions. 
