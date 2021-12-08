@@ -40,3 +40,22 @@ format itself. Readers and writers are pre-compiled run-time based on
 a map/type combination and aren't required to be matching type versions. 
 These can then be cached in an application for performant, tollerant, 
 light-weight communications.
+
+# Notes
+
+This solution out-performs the native C# formatters
+(depreciated for security reasons), but it doesn't
+match the .net protobuffs performance based on some
+crude benchmarking. 
+
+The data size should be as small
+as possible for basic data types without using 
+a compression algorithm. Data-type serialization can be 
+extended / customized to further reduce data size where
+appropriate. Well-known types are not covered in the
+default serialization strategies (e.g. DateTime, etc).
+
+With some tweeking this solution could be more platform agnostic.
+Currently serialization maps are based on .NET type names
+and namespaces. These could be changed to be based on a set of
+well-known names that would make sense to other platforms.
