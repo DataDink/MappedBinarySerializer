@@ -1,16 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Serialization
-{
+namespace Serialization {
     /// <summary>
     /// Binary serialization that is mapped allowing data mutation
     /// </summary>
-    public static partial class MappedBinarySerializer
-    {
+    public static partial class MappedBinarySerializer {
         /// <summary>
         /// Thrown when an error is encountered.
         /// </summary>
@@ -36,8 +34,7 @@ namespace Serialization
             object Read(BinaryReader reader);
         }
 
-        private class DefaultStrategy : ISerializationStrategy
-        {
+        private class DefaultStrategy : ISerializationStrategy {
             public Type Type { get; private set; }
             private readonly Func<BinaryReader, object> _read;
             public object Read(BinaryReader reader) => _read(reader);
