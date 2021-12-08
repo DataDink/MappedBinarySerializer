@@ -5,15 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Serialization
-{
-    public static partial class MappedBinarySerializer
-    {
+namespace Serialization {
+    public static partial class MappedBinarySerializer {
         /// <summary>
         /// A binary serialization reader that is precompiled to a Map and Type and should be cached for performance
         /// </summary>
-        public class Reader 
-        {
+        public class Reader {
             /// <summary>
             /// Describes a single unit of deserialization
             /// </summary>
@@ -59,8 +56,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches member/array setters and strategies and builds a ValueReader
             /// </summary>
-            private static ValueReader Build(Map.Node map, Type type, Dictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static ValueReader Build(Map.Node map, Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 var model = map as Map.Model;
                 if (model != default) { return BuildModel(model, type, strategies); }
                 var collection = map as Map.Collection;
@@ -72,8 +68,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches a strategy and builds a ValueReader
             /// </summary>
-            private static ValueReader BuildContent(Map.Content content, Type type, Dictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static ValueReader BuildContent(Map.Content content, Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 if (!strategies.ContainsKey(content.Value)) {
                     throw new SerializationException($"Missing serialization strategy: {content.Value}");
                 }
@@ -83,8 +78,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches an array builder and builds a ValueReader
             /// </summary>
-            private static ValueReader BuildCollection(Map.Collection collection, Type type, Dictionary<string, ISerializationStrategy> strategies)
-            {
+            private static ValueReader BuildCollection(Map.Collection collection, Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 var element = type.IsArray ? type.GetElementType() : typeof(object);
                 var content = collection.Contents;
                 var readFactory = Build(content, element, strategies);
@@ -100,8 +94,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches member setters and builds a ValueReader
             /// </summary>
-            private static ValueReader BuildModel(Map.Model model, Type type, Dictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static ValueReader BuildModel(Map.Model model, Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 var setters = model
                     .Select(member => {
                         var info = GetMembers(type).FirstOrDefault(m => m.Name == member.Key);
