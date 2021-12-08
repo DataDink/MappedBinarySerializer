@@ -5,15 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Serialization
-{
-    public static partial class MappedBinarySerializer
-    {
+namespace Serialization {
+    public static partial class MappedBinarySerializer {
         /// <summary>
         /// A binary serialization writer that is precompiled to a Map and Type and should be cached for performance
         /// </summary>
-        public class Writer
-        {
+        public class Writer {
             /// <summary>
             /// Describes a single unit of serialization
             /// </summary>
@@ -34,8 +31,7 @@ namespace Serialization
             /// <summary>
             /// Serializes data to a byte array
             /// </summary>
-            public byte[] Write(object data)
-            {
+            public byte[] Write(object data) {
                 using (var stream = new MemoryStream()) {
                     Write(data, stream);
                     stream.Position = 0;
@@ -45,8 +41,7 @@ namespace Serialization
             /// <summary>
             /// Serializes data to a Stream
             /// </summary>
-            public void Write(object data, Stream stream)
-            {
+            public void Write(object data, Stream stream) {
                 using (var writer = new BinaryWriter(stream, System.Text.Encoding.UTF8, true)) {
                     Write(data, writer);
                 }
@@ -77,8 +72,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches member/array getters and strategies and compiles a WriterNode
             /// </summary>
-            private static WriterNode Build(Map.Node map, Type type, IDictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static WriterNode Build(Map.Node map, Type type, IDictionary<string, ISerializationStrategy> strategies) {
                 var model = map as Map.Model;
                 if (model != null) { return BuildModel(model, type, strategies); }
                 var collection = map as Map.Collection;
@@ -106,8 +100,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches an array getter and builds a WriterNode
             /// </summary>
-            private static WriterNode BuildCollection(Map.Collection collection, Type type, IDictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static WriterNode BuildCollection(Map.Collection collection, Type type, IDictionary<string, ISerializationStrategy> strategies) {
                 var collectionType = type.GetElementType();
                 var countWriter = strategies[typeof(int).FullName];
                 var itemWriter = Build(collection.Contents, collectionType, strategies);
@@ -128,8 +121,7 @@ namespace Serialization
             /// <summary>
             /// Prefetches member getters and builds a WriterNode
             /// </summary>
-            private static WriterNode BuildModel(Map.Model map, Type type, IDictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static WriterNode BuildModel(Map.Model map, Type type, IDictionary<string, ISerializationStrategy> strategies) {
                 var factories = map
                     .Select(mapMember => {
                         var memberInfo = GetMembers(type).FirstOrDefault(info => info.Name == mapMember.Key);
