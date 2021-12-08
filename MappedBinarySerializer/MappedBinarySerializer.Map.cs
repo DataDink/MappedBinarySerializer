@@ -18,14 +18,12 @@ namespace Serialization
             /// <summary>
             /// Parses a map from a string
             /// </summary>
-            public static Node Parse(string map) 
-            {
+            public static Node Parse(string map) {
                 var index = 0;
                 return Read(map.ToCharArray(), ref index);
             }
 
-            private static Node Read(char[] map, ref int index) 
-            {
+            private static Node Read(char[] map, ref int index) {
                 Trim(map, ref index);
                 if (map[index] == '"') { return ReadContent(map, ref index); }
                 if (map[index] == '[') { return ReadCollection(map, ref index); }
@@ -74,25 +72,21 @@ namespace Serialization
             public static string Format(Type type, IEnumerable<ISerializationStrategy> strategies = null) 
                 => Format(type, CreateStrategyDictionary(strategies));
 
-            private static string Format(Type type, Dictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static string Format(Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 if (strategies.ContainsKey(type.FullName)) { return FormatContent(type, strategies); }
                 if (type.IsArray) { return FormatCollection(type, strategies); }
                 return FormatMap(type, strategies);
             }
 
-            private static string FormatContent(Type type, Dictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static string FormatContent(Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 return $"\"{type.FullName}\"";
             }
 
-            private static string FormatCollection(Type type, Dictionary<string, ISerializationStrategy> strategies)
-            {
+            private static string FormatCollection(Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 return $"[{Format(type.GetElementType(), strategies)}]";
             }
 
-            private static string FormatMap(Type type, Dictionary<string, ISerializationStrategy> strategies) 
-            {
+            private static string FormatMap(Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 var members = 
                     GetMembers(type)
                     .Select(m => 
@@ -129,8 +123,7 @@ namespace Serialization
             /// <summary>
             /// Represents a data model
             /// </summary>
-            public class Model : Node, IEnumerable<KeyValuePair<string, Node>>
-            {
+            public class Model : Node, IEnumerable<KeyValuePair<string, Node>> {
                 private readonly KeyValuePair<string, Node>[] Nodes;
                 /// <inheritdoc />
                 public Model(IEnumerable<KeyValuePair<string, Node>> nodes) 
