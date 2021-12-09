@@ -65,7 +65,7 @@ namespace Serialization {
             public static Writer Compile(string map, Type type, IEnumerable<ISerializationStrategy> strategies = null)
                 => Compile(Map.Parse(map), type, strategies);
             /// <summary>
-            /// Precompiles a MappedBinarySerializer.Writer that should be cached for performance
+            /// Compiles a MappedBinarySerializer.Writer that should be cached for performance
             /// </summary>
             public static Writer Compile(Map.Node map, Type type, IEnumerable<ISerializationStrategy> strategies = null)
                 => new Writer(Build(map, type, CreateStrategyDictionary(strategies)));
@@ -98,7 +98,7 @@ namespace Serialization {
                 };
             }
             /// <summary>
-            /// Prefetches an array getter and builds a WriterNode
+            /// Compiles an array getter and builds a WriterNode
             /// </summary>
             private static WriterNode BuildCollection(Map.Collection collection, Type type, IDictionary<string, ISerializationStrategy> strategies) {
                 var collectionType = type.GetElementType();
