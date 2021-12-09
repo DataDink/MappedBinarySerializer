@@ -16,7 +16,7 @@ namespace Serialization {
             /// </summary>
             private delegate object ValueReader(BinaryReader reader);
             /// <summary>
-            /// The entery point for this reader
+            /// The entry point for this reader
             /// </summary>
             private readonly ValueReader Start;
             /// <summary>
