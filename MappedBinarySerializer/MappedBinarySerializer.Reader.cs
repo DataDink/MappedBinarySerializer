@@ -49,7 +49,7 @@ namespace Serialization {
             public static Reader Compile(string map, Type type, IEnumerable<ISerializationStrategy> strategies = null)
                 => Compile(Map.Parse(map), type, strategies);
             /// <summary>
-            /// Precompiles a MappedBinarySerializer.Reader that should be cached for performance
+            /// Compiles a MappedBinarySerializer.Reader that should be cached for performance
             /// </summary>
             public static Reader Compile(Map.Node map, Type type, IEnumerable<ISerializationStrategy> strategies = null)
                 => new Reader(Build(map, type, CreateStrategyDictionary(strategies)));
@@ -76,7 +76,7 @@ namespace Serialization {
                 return reader => strategy.Read(reader);
             }
             /// <summary>
-            /// Prefetches an array builder and builds a ValueReader
+            /// Compiles an array builder and builds a ValueReader
             /// </summary>
             private static ValueReader BuildCollection(Map.Collection collection, Type type, Dictionary<string, ISerializationStrategy> strategies) {
                 var element = type.IsArray ? type.GetElementType() : typeof(object);
